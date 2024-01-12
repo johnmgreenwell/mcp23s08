@@ -59,17 +59,17 @@ bool MCP23S08::pinMode(uint8_t pin, uint8_t mode) const
 
 void MCP23S08::portMode(uint8_t mode) const 
 {
-    if (mode == INPUT) 
+    if (mode == GPIO_INPUT) 
     { 
         spiWrite(MCP23S08_GPPU, 0x00);
         spiWrite(MCP23S08_IODIR, 0xFF);
     } 
-    else if (mode == OUTPUT) 
+    else if (mode == GPIO_OUTPUT) 
     {
         spiWrite(MCP23S08_GPPU, 0x00);
         spiWrite(MCP23S08_IODIR, 0x00);
     } 
-    else if (mode == INPUT_PULLUP)
+    else if (mode == GPIO_INPUT_PULLUP)
     {
         spiWrite(MCP23S08_GPPU, 0xFF);
         spiWrite(MCP23S08_IODIR, 0xFF);

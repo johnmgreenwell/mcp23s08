@@ -22,7 +22,7 @@
 namespace PeripheralIO
 {
 
-// Base I2C address
+// Base address
 const uint8_t MCP23S08_ADDR    = 0x20;
 
 // Register map
@@ -79,7 +79,7 @@ class MCP23S08
         /**
          * @brief Read value from individual pin 0-7; pin must already be configured as input
          * @param pin Pin 0-7 from which value is read
-         * @return Value read from pin. Zero for logic low, one for logic high
+         * @return Value read from pin; zero for logic low, one for logic high
         */
         uint8_t digitalRead(uint8_t pin) const;
 
