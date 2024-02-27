@@ -22,35 +22,40 @@
 namespace PeripheralIO
 {
 
-// Base address
-const uint8_t MCP23S08_ADDR    = 0x20;
-
-// Register map
-const uint8_t MCP23S08_IODIR   = 0x00;
-const uint8_t MCP23S08_IPOL    = 0x01;
-const uint8_t MCP23S08_GPINTEN = 0x02;
-const uint8_t MCP23S08_DEFVAL  = 0x03;
-const uint8_t MCP23S08_INTCON  = 0x04;
-const uint8_t MCP23S08_IOCON   = 0x05;
-const uint8_t MCP23S08_GPPU    = 0x06;
-const uint8_t MCP23S08_INTF    = 0x07;
-const uint8_t MCP23S08_INTCAP  = 0x08;
-const uint8_t MCP23S08_GPIO    = 0x09;
-const uint8_t MCP23S08_OLAT    = 0x0A;
-
 class MCP23S08 
 {
     public:
 
-        /**
-         * @brief Constructor for MCP23S08 object
-         * @param address Hardwired address (requires only the 2 LSB matching device external biasing)
-         * @param spi_channel Identifier able to be used by HAL when more than one SPI channel in parent project
-        */
-        MCP23S08(uint8_t address, uint8_t cs_pin, uint8_t spi_channel=0);
+        enum MCP23S08_ADDR_t
+        {
+            MCP23S08_ADDR    = 0x20
+        };
+
+        enum MCP23S08_REG_t
+        {
+            MCP23S08_IODIR   = 0x00,
+            MCP23S08_IPOL    = 0x01,
+            MCP23S08_GPINTEN = 0x02,
+            MCP23S08_DEFVAL  = 0x03,
+            MCP23S08_INTCON  = 0x04,
+            MCP23S08_IOCON   = 0x05,
+            MCP23S08_GPPU    = 0x06,
+            MCP23S08_INTF    = 0x07,
+            MCP23S08_INTCAP  = 0x08,
+            MCP23S08_GPIO    = 0x09,
+            MCP23S08_OLAT    = 0x0A
+        };
 
         /**
-         * @brief Initialize MCP23S08 device; device will not work correctly without initialization
+         * @brief Constructor for MCP23S08 object
+         * @param spi_bus Reference to SPI bus to be used for MCP23S08 device
+         * @param cs_pin Pin identifier to be used for CS pin
+         * @param address Hardwired address (requires only the 2 LSB matching device external biasing)
+        */
+        MCP23S08(HAL::SPI& spi_bus, uint8_t cs_pin, uint8_t address=MCP23S08_ADDR);
+
+        /**
+         * @brief Initialize MCP23S08 device
         */
         void init() const;
 
@@ -109,9 +114,9 @@ class MCP23S08
         uint8_t read(uint8_t reg) const;
  
 private:
-    uint8_t   _address;
+    HAL::SPI& _spi;
     HAL::GPIO _cs_pin;
-    HAL::SPI  _spi;
+    uint8_t   _address;
 
     void spiWrite(uint8_t reg, uint8_t byte) const;
     uint8_t spiRead(uint8_t reg) const;

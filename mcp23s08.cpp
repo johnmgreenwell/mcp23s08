@@ -13,15 +13,17 @@
 namespace PeripheralIO 
 {
 
-MCP23S08::MCP23S08(uint8_t address, uint8_t cs_pin, uint8_t spi_channel)
-: _address((MCP23S08_ADDR | (address & 0x03)) << 1)
+MCP23S08::MCP23S08(HAL::SPI& spi_bus, uint8_t cs_pin, uint8_t address)
+: _spi(spi_bus)
 , _cs_pin(cs_pin)
-, _spi(spi_channel)
-{ }
+, _address((MCP23S08_ADDR | (address & 0x03)) << 1)
+{
+    _cs_pin.pinMode(GPIO_OUTPUT);
+    _cs_pin.digitalWrite(true);
+}
 
 void MCP23S08::init() const
 {
-    _spi.init();
     _cs_pin.pinMode(GPIO_OUTPUT);
     _cs_pin.digitalWrite(true);
 }
