@@ -1,0 +1,18 @@
+{
+    "name": "mcp23s08",
+    "version": "1.0.0",
+    "description": "Portable, multi-instance SPI IO-expander driver",
+    "keywords": "embedded, driver, hal, gpio, expander, io, mcp23s08",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/johnmgreenwell/mcp23s08"
+    },
+    "license": "MIT",
+    "frameworks": "*",
+    "platforms": "*",
+    "build": {
+        "flags": [
+        "-I../../include"
+        ]
+    }
+}
