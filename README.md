@@ -4,7 +4,7 @@ Portable, multi-instance SPI IO-expander driver.
 
 ## Overview
 
-This HAL-mediated custom [MCP23S08](https://www.digikey.com/en/products/detail/microchip-technology/MCP23S08T-E-SO/739287) IO-expander driver permits ease of use that is portable across many platforms.
+This HAL-mediated custom [MCP23S08](https://www.digikey.com/en/products/detail/microchip-technology/MCP23S08T-E-SO/739287) IO-expander driver permits ease of use that is designed to be platform-independent.
 
 ## Usage
 
